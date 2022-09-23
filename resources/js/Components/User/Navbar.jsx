@@ -1,5 +1,6 @@
 import { Link, usePage } from "@inertiajs/inertia-react";
 import React from "react";
+import ApplicationLogo from "../ApplicationLogo";
 
 const Navbar = ({ chart, setChart }) => {
     const { component } = usePage();
@@ -57,8 +58,9 @@ const Navbar = ({ chart, setChart }) => {
                 <div className="navbar-center">
                     <Link
                         href={route("homepage")}
-                        className="btn btn-ghost normal-case text-xl"
+                        className="btn btn-ghost normal-case text-xl flex gap-2"
                     >
+                        <ApplicationLogo className="w-10 fill-white text-gray-500" />
                         QuertyShop
                     </Link>
                 </div>
