@@ -16,7 +16,7 @@ const ListProduct = (props) => {
                             <div className="h-32 group-hover:saturate-150 group-hover:contrast-125">
                                 <img
                                     className="h-32 rounded w-full"
-                                    src={data.cover}
+                                    src={"/storage/" + `${data.cover}`}
                                     alt={data.name}
                                 />
                             </div>
