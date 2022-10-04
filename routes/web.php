@@ -11,6 +11,7 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\UserProductsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facedes\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,11 @@ Route::post('announcement/{announcement}', [AnnouncementController::class, 'upda
 Route::resource('carousel', CarouselController::class)->middleware(['auth']);
 Route::post('carousel/{carousel}', [CarouselController::class, 'update'])->name('carousel.update')->middleware(['auth']);
 
+Route::get('/artisan/storage', function() {
+    $command = 'storage:link';
+    $result = Artisan::call($command);
+    return Artisan::output();
+});
 
 
 
