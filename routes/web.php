@@ -9,9 +9,9 @@ use App\Http\Controllers\Admin\WhatsappNumberController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\UserProductsController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Illuminate\Support\Facedes\Artisan;
 
 /*
 |--------------------------------------------------------------------------
