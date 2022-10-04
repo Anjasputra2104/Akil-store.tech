@@ -1,8 +1,8 @@
 import React from "react";
-import background from "../../../../public/storage/images/waves/waves.png";
-import hand from "../../../../public/storage/images/icon/hand.svg";
-import cash from "../../../../public/storage/images/icon/cash.svg";
-import whatsapp from "../../../../public/storage/images/icon/whatsapp.svg";
+import background from "/public/waves/waves.png";
+import hand from "/public/icon/hand.svg";
+import cash from "/public/icon/cash.svg";
+import whatsapp from "/public/icon/whatsapp.svg";
 
 const Services = () => {
     return (

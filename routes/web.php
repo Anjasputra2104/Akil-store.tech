@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\admin\AnnouncementController;
+use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\CarouselController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\admin\PaymentMethodController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\WhatsappNumberController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\UserProductsController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -51,4 +50,4 @@ Route::post('carousel/{carousel}', [CarouselController::class, 'update'])->name(
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

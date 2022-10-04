@@ -2,7 +2,7 @@ import { Link } from "@inertiajs/inertia-react";
 import React from "react";
 
 // icons
-import Whatsapp from "../../../../public/storage/images/icon/whatsapp.svg";
+import Whatsapp from "/public/icon/whatsapp.svg";
 
 const Footer = () => {
     return (

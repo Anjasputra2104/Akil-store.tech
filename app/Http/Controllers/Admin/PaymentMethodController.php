@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PaymentMethod;
@@ -89,13 +89,13 @@ class PaymentMethodController extends Controller
     public function update(Request $request, PaymentMethod $paymentmethod)
     {
         $this->validate($request, [
-                'account' => 'required',
-                'number' => 'required',
+            'account' => 'required',
+            'number' => 'required',
         ]);
         $paymentmethod->update([
-                'account' => $request->account,
-                'number' => $request->number,
-                'on_behalf' => $request->on_behalf,
+            'account' => $request->account,
+            'number' => $request->number,
+            'on_behalf' => $request->on_behalf,
         ]);
 
         return redirect()->route('paymentmethod.index');

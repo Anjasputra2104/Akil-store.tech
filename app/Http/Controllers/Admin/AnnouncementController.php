@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
@@ -16,7 +16,7 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-         $announ = Announcement::orderBy('created_at', 'desc')->get();
+        $announ = Announcement::orderBy('created_at', 'desc')->get();
         return Inertia::render('Admin/Announcement/Index', [
             "announ" => $announ,
         ]);
@@ -59,7 +59,6 @@ class AnnouncementController extends Controller
      */
     public function show($id)
     {
-
     }
 
     /**
@@ -86,10 +85,10 @@ class AnnouncementController extends Controller
     public function update(Request $request, Announcement $announcement)
     {
         $this->validate($request, [
-                'announcement' => 'required',
-            ]);
+            'announcement' => 'required',
+        ]);
         $announcement->update([
-                'announcement' => $request->announcement,
+            'announcement' => $request->announcement,
         ]);
 
         return redirect()->route('announcement.index');

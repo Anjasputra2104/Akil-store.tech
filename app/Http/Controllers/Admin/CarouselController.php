@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class CarouselController extends Controller
@@ -17,7 +18,7 @@ class CarouselController extends Controller
     public function index()
     {
         $carousel = Carousel::all();
-        return Inertia::render('Admin/Carousel/Index',[
+        return Inertia::render('Admin/Carousel/Index', [
             'carousel' => $carousel
         ]);
     }
@@ -48,7 +49,7 @@ class CarouselController extends Controller
         $image_path = "";
 
         if ($request->hasFile('image')) {
-            $image_path = $request->file('image')->store('images/carousel', 'public');
+            $image_path = $request->file('image')->store('images/carousel');
         }
 
         $create = new Carousel();
@@ -100,13 +101,13 @@ class CarouselController extends Controller
                 'tag' => 'required',
                 'image' => 'mimes:png,jpg,jpeg'
             ]);
-            unlink(public_path('storage/'. $carousel->image));
-            $image_path = $request->file('image')->store('images/carousel', 'public');
+            Storage::delete($carousel->image);
+            $image_path = $request->file('image')->store('images/carousel');
             $carousel->update([
                 'tag' => $request->tag,
                 'image' => $image_path
             ]);
-        } else{
+        } else {
             $this->validate($request, [
                 'tag' => 'required',
             ]);
@@ -127,7 +128,7 @@ class CarouselController extends Controller
      */
     public function destroy(Carousel $carousel)
     {
-        unlink(public_path('storage/'. $carousel->image));
+        Storage::delete($carousel->image);
         $carousel->delete();
         return redirect()->back();
     }

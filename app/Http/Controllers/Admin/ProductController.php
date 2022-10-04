@@ -53,7 +53,7 @@ class ProductController extends Controller
         $image_path = "";
 
         if ($request->hasFile('cover')) {
-            $image_path = $request->file('cover')->store('images/products', 'public');
+            $image_path = $request->file('cover')->store('images/products');
         }
 
         $product = new Product();
@@ -64,16 +64,16 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->save();
 
-        if($request->hasFile("images")){
-                $files=$request->file("images");
-                foreach($files as $file){
-                    $image_path = $file->store('images/products', 'public');
-                    $image = new ProductImage();
-                    $image->product_id = $product->id;
-                    $image->image = $image_path;
-                    $image->save();
-                }
+        if ($request->hasFile("images")) {
+            $files = $request->file("images");
+            foreach ($files as $file) {
+                $image_path = $file->store('images/products');
+                $image = new ProductImage();
+                $image->product_id = $product->id;
+                $image->image = $image_path;
+                $image->save();
             }
+        }
 
         return redirect()->route('products.index');
     }
@@ -97,7 +97,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::where('id',$id)->with('images')->firstOrfail();
+        $product = Product::where('id', $id)->with('images')->firstOrfail();
         return Inertia::render("Admin/Products/Edit", [
             'product' => $product
         ]);
@@ -116,8 +116,8 @@ class ProductController extends Controller
         $image_path = "";
 
         if ($request->hasFile('cover')) {
-            unlink(public_path('storage/'. $product->cover));
-            $image_path = $request->file('cover')->store('images/products', 'public');
+            Storage::delete($product->cover);
+            $image_path = $request->file('cover')->store('images/products');
             $product->update([
                 'name' => $request->name,
                 'price' => $request->price,
@@ -125,7 +125,7 @@ class ProductController extends Controller
                 'description' => $request->description,
                 'cover' => $image_path
             ]);
-        } else{
+        } else {
             $product->update([
                 'name' => $request->name,
                 'price' => $request->price,
@@ -134,20 +134,19 @@ class ProductController extends Controller
             ]);
         }
 
-        if($request->hasFile("images")){
-                $files=$request->file("images");
-                foreach($files as $file){
-                    $image_path = $file->store('images/products', 'public');
-                    $image = new ProductImage();
-                    $image->product_id = $product->id;
-                    $image->image = $image_path;
-                    $image->save();
-                }
+        if ($request->hasFile("images")) {
+            $files = $request->file("images");
+            foreach ($files as $file) {
+                $image_path = $file->store('images/products');
+                $image = new ProductImage();
+                $image->product_id = $product->id;
+                $image->image = $image_path;
+                $image->save();
             }
+        }
 
 
         return redirect()->route('products.index');
-
     }
 
     /**
@@ -159,19 +158,19 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $productImage = ProductImage::where('product_id', $product->id)->get();
-        foreach($productImage as $image){
-            unlink(public_path('storage/'. $image->image));
+        foreach ($productImage as $image) {
+            Storage::delete($image->image);
             $image->delete();
         }
-        unlink(public_path('storage/'. $product->cover));
+        Storage::delete($product->cover);
         $product->delete();
         return redirect()->back();
     }
 
-    public function deleteImage($id,ProductImage $idImage)
+    public function deleteImage($id, ProductImage $idImage)
     {
         // dd($idImage);
-        unlink(public_path('storage/'. $idImage->image));
+        Storage::delete($idImage->image);
         $idImage->delete();
         return redirect()->back();
     }
